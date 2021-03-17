@@ -14,6 +14,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include "tlo.h"
+#include "nuta.h"
+#include "klawisz.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,7 +36,13 @@ private:
     Tlo *tlo;
     QGraphicsScene *scene;
     QMediaPlayer *theme;
+    Nuta *nuta;
+    Klawisz *kl1;
+    Klawisz *kl2;
+    Klawisz *kl3;
+    Klawisz *kl4;
 
-
+    bool inGame;
+    void startGame();
 };
 #endif // MAINWINDOW_H

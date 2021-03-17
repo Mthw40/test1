@@ -9,7 +9,7 @@ class Tlo : public QObject, public QGraphicsPixmapItem
 {
 public:
     Tlo();
-    void lvl1();
+    void lvl();
 };
 
 #endif // TLO_H

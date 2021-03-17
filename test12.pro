@@ -9,12 +9,14 @@ CONFIG += c++11 resources_big
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    klawisz.cpp \
     main.cpp \
     mainwindow.cpp \
     nuta.cpp \
     tlo.cpp
 
 HEADERS += \
+    klawisz.h \
     mainwindow.h \
     nuta.h \
     tlo.h
@@ -26,3 +28,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Zasoby.qrc

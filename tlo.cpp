@@ -5,8 +5,9 @@ Tlo::Tlo()
     setPixmap(QPixmap("")); //menu główne
 }
 
-void Tlo::lvl1()
+void Tlo::lvl()
 {
-    setPixmap(QPixmap("")); //poziom 1
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/lvl.jpg")); //poziom
+    //!!!do tworzenia tła poziomu używać tej samej rozdzielczości!!!
 }
 

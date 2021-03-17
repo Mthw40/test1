@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>Zasoby/MainTheme.wav</file>
+        <file>Zasoby/kl1.png</file>
+        <file>Zasoby/kl2.png</file>
+        <file>Zasoby/lvl.jpg</file>
     </qresource>
 </RCC>
