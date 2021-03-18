@@ -13,12 +13,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     nuta.cpp \
+    ok.cpp \
+    perfect.cpp \
     tlo.cpp
 
 HEADERS += \
     klawisz.h \
     mainwindow.h \
     nuta.h \
+    ok.h \
+    perfect.h \
     tlo.h
 
 FORMS += \

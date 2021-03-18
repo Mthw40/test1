@@ -16,6 +16,8 @@
 #include "tlo.h"
 #include "nuta.h"
 #include "klawisz.h"
+#include "ok.h"
+#include "perfect.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +43,14 @@ private:
     Klawisz *kl2;
     Klawisz *kl3;
     Klawisz *kl4;
+    Ok *kl1_ok;
+    Ok *kl2_ok;
+    Ok *kl3_ok;
+    Ok *kl4_ok;
+    Perfect *kl1_perfect;
+    Perfect *kl2_perfect;
+    Perfect *kl3_perfect;
+    Perfect *kl4_perfect;
 
     bool inGame;
     void startGame();

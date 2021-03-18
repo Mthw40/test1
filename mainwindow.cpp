@@ -18,6 +18,15 @@ MainWindow::MainWindow(QWidget *parent)
     kl3 = new Klawisz();
     kl4 = new Klawisz();
     kl4->setSecond();
+    //dodanie hitboxów nut dla poszczególnych klawiszy
+    kl1_ok = new Ok();
+    kl1_perfect = new Perfect();
+    kl2_ok = new Ok();
+    kl2_perfect = new Perfect();
+    kl3_ok = new Ok();
+    kl3_perfect = new Perfect();
+    kl4_ok = new Ok();
+    kl4_perfect = new Perfect();
 
     scene->addItem(tlo); //dodanie tła do sceny
     ui->graphicsView->setScene(scene); //ustawienie sceny
@@ -58,7 +67,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 void MainWindow::startGame()
 {
     tlo->lvl();
-    scene->addItem(kl1); //dodanie i ustawienie klawiszy w odpowiednich miejscach
+    //dodanie i ustawienie klawiszy w odpowiednich miejscach
+    scene->addItem(kl1);
     kl1->setPos(8,y()+800);
     scene->addItem(kl2);
     kl2->setPos(483,y()+800);
@@ -66,9 +76,26 @@ void MainWindow::startGame()
     kl3->setPos(956,y()+800);
     scene->addItem(kl4);
     kl4->setPos(1430,y()+800);
+    //dodanie i ustawienie hitboxów w odpowiednich miejscach !!!współrzędne y jeszcze nie są ustawione!!!
+    scene->addItem(kl1_ok);
+    kl1_ok->setPos(8,y());
+    scene->addItem(kl1_perfect);
+    kl1_perfect->setPos(8,y());
+    scene->addItem(kl2_ok);
+    kl2_ok->setPos(483,y());
+    scene->addItem(kl2_perfect);
+    kl2_perfect->setPos(483,y());
+    scene->addItem(kl3_ok);
+    kl3_ok->setPos(956,y());
+    scene->addItem(kl3_perfect);
+    kl3_perfect->setPos(956,y());
+    scene->addItem(kl4_ok);
+    kl4_ok->setPos(1430,y());
+    scene->addItem(kl4_perfect);
+    kl4_perfect->setPos(1430,y());
+
+    //theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav")); //theme poziomu
+    //theme->play();
 
     inGame=true;
 }
-
-
-
