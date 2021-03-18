@@ -77,6 +77,7 @@ void MainWindow::startGame()
     scene->addItem(kl4);
     kl4->setPos(1430,y()+800);
     //dodanie i ustawienie hitboxów w odpowiednich miejscach !!!współrzędne y jeszcze nie są ustawione!!!
+    /*
     scene->addItem(kl1_ok);
     kl1_ok->setPos(8,y());
     scene->addItem(kl1_perfect);
@@ -93,6 +94,7 @@ void MainWindow::startGame()
     kl4_ok->setPos(1430,y());
     scene->addItem(kl4_perfect);
     kl4_perfect->setPos(1430,y());
+    */
 
     //theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav")); //theme poziomu
     //theme->play();

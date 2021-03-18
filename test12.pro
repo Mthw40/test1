@@ -14,6 +14,8 @@ SOURCES += \
     mainwindow.cpp \
     nuta.cpp \
     ok.cpp \
+    ok.cpp \
+    perfect.cpp \
     perfect.cpp \
     tlo.cpp
 
@@ -22,6 +24,8 @@ HEADERS += \
     mainwindow.h \
     nuta.h \
     ok.h \
+    ok.h \
+    perfect.h \
     perfect.h \
     tlo.h
 
