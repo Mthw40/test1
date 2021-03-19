@@ -13,6 +13,7 @@
 #include <QRandomGenerator>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QCursor>
 #include "tlo.h"
 #include "nuta.h"
 #include "klawisz.h"

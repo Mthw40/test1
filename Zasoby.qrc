@@ -8,5 +8,7 @@
         <file>Zasoby/key-press-2.wav</file>
         <file>Zasoby/key-press-3.wav</file>
         <file>Zasoby/key-press-4.wav</file>
+        <file>Zasoby/menu.jpg</file>
+        <file>Zasoby/cursor.png</file>
     </qresource>
 </RCC>

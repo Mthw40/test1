@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     showFullScreen();
-
+    QPixmap p = QPixmap(":/new/prefix1/Zasoby/cursor.png");
+    QCursor c = QCursor(p,0,0);
+    setCursor(c);
     inGame=false;
     tlo = new Tlo();
     scene = new QGraphicsScene();

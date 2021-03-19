@@ -7,7 +7,7 @@ Tlo::Tlo()
 
 void Tlo::showMenu()
 {
-    setPixmap(QPixmap("")); //menu główne
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/menu.jpg")); //menu główne
 }
 
 void Tlo::lvl()
