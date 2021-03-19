@@ -55,5 +55,6 @@ private:
 
     bool inGame;
     void startGame();
+    void endGame();
 };
 #endif // MAINWINDOW_H

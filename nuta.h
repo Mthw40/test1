@@ -4,7 +4,6 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
-#include <QMediaPlayer>
 #include <QTimer>
 #include <QtCore>
 
@@ -14,9 +13,9 @@ class Nuta : public QObject, public QGraphicsPixmapItem
 public:
     Nuta();
     QTimer *timer;
-    QMediaPlayer *player;
 private slots:
     void onTimerTimeout();
+
 };
 
 #endif // NUTA_H

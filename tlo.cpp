@@ -2,6 +2,11 @@
 
 Tlo::Tlo()
 {
+    showMenu();
+}
+
+void Tlo::showMenu()
+{
     setPixmap(QPixmap("")); //menu główne
 }
 

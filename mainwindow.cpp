@@ -57,28 +57,61 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 {
     if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
         kl1->clicked();
+        kl1_perfect->check();
+        if(kl1_perfect->isChecked()){
+            //score + perfect
+        }
+        kl1_ok->check();
+        if(kl1_ok->isChecked()){
+            //score + ok
+        }
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();
+        kl2_perfect->check();
+        if(kl2_perfect->isChecked()){
+            //score + perfect
+        }
+        kl2_ok->check();
+        if(kl2_ok->isChecked()){
+            //score + ok
+        }
     }
     if(event->key()==Qt::Key_J && inGame){ // 3. klawisz
         kl3->clicked();
+        kl3_perfect->check();
+        if(kl3_perfect->isChecked()){
+            //score + perfect
+
+        }
+        kl3_ok->check();
+        if(kl3_ok->isChecked()){
+            //score + ok
+        }
     }
     if(event->key()==Qt::Key_K && inGame){ // 4. klawisz
         kl4->clicked();
+        kl4_perfect->check();
+        if(kl4_perfect->isChecked()){
+            //score + perfect
+        }
+        kl4_ok->check();
+        if(kl4_ok->isChecked()){
+            //score + ok
+        }
     }
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
+        theme->stop();
     }
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
     }
-    if(event->key()==Qt::Key_N){
+    if(event->key()==Qt::Key_N && inGame){
         nuta = new Nuta();
         nuta->setPos(483,y());
         scene->addItem(nuta);
     }
-
 }
 
 void MainWindow::startGame()
@@ -117,4 +150,9 @@ void MainWindow::startGame()
     //theme->play();
 
     inGame=true;
+}
+
+void MainWindow::endGame()
+{
+    inGame=false;
 }
