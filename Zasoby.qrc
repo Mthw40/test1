@@ -4,5 +4,9 @@
         <file>Zasoby/kl1.png</file>
         <file>Zasoby/kl2.png</file>
         <file>Zasoby/lvl.jpg</file>
+        <file>Zasoby/key-press-1.wav</file>
+        <file>Zasoby/key-press-2.wav</file>
+        <file>Zasoby/key-press-3.wav</file>
+        <file>Zasoby/key-press-4.wav</file>
     </qresource>
 </RCC>
