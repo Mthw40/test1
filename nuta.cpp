@@ -2,7 +2,7 @@
 
 Nuta::Nuta()
 {
-    setPixmap(QPixmap("")); //tekstura nuty
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl2.png")); //tekstura nuty
     timer = new QTimer(this);
 
     player = new QMediaPlayer();
@@ -15,5 +15,9 @@ Nuta::Nuta()
 
 void Nuta::onTimerTimeout()
 {
-    setPos(x(),y()+10);
+    setPos(x(),y()+60);
+    if(this->y()>=800)
+    {
+        delete this;
+    }
 }

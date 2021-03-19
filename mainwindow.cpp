@@ -42,7 +42,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
         kl1->released();
-
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->released();
@@ -58,7 +57,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 {
     if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
         kl1->clicked();
-
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();
@@ -74,6 +72,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
+    }
+    if(event->key()==Qt::Key_N){
+        nuta = new Nuta();
+        nuta->setPos(483,y());
+        scene->addItem(nuta);
     }
 
 }
