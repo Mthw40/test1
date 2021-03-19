@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     showFullScreen();
+
     QPixmap p = QPixmap(":/new/prefix1/Zasoby/cursor.png");
     QCursor c = QCursor(p,0,0);
     setCursor(c);
@@ -62,45 +63,56 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         kl1_perfect->check();
         if(kl1_perfect->isChecked()){
             //score + perfect
+            score+=100;
         }
         kl1_ok->check();
         if(kl1_ok->isChecked()){
             //score + ok
+            score+=50;
         }
+        refreshScore();
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();
         kl2_perfect->check();
         if(kl2_perfect->isChecked()){
             //score + perfect
+            score+=100;
         }
         kl2_ok->check();
         if(kl2_ok->isChecked()){
             //score + ok
+            score+=50;
         }
+        refreshScore();
     }
     if(event->key()==Qt::Key_J && inGame){ // 3. klawisz
         kl3->clicked();
         kl3_perfect->check();
         if(kl3_perfect->isChecked()){
             //score + perfect
-
+            score+=100;
         }
         kl3_ok->check();
         if(kl3_ok->isChecked()){
             //score + ok
+            score+=50;
         }
+        refreshScore();
     }
     if(event->key()==Qt::Key_K && inGame){ // 4. klawisz
         kl4->clicked();
         kl4_perfect->check();
         if(kl4_perfect->isChecked()){
             //score + perfect
+            score+=100;
         }
         kl4_ok->check();
         if(kl4_ok->isChecked()){
             //score + ok
+            score+=50;
         }
+        refreshScore();
     }
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
@@ -119,6 +131,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 void MainWindow::startGame()
 {
     tlo->lvl();
+    score=0;
     //dodanie i ustawienie klawiszy w odpowiednich miejscach
     scene->addItem(kl1);
     kl1->setPos(8,y()+800);
@@ -157,4 +170,9 @@ void MainWindow::startGame()
 void MainWindow::endGame()
 {
     inGame=false;
+}
+
+void MainWindow::refreshScore()
+{
+    //ui->scoreLabel->setText("Wynik: "+score);
 }

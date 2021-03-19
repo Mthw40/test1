@@ -55,7 +55,9 @@ private:
     Perfect *kl4_perfect;
 
     bool inGame;
+    int score;
     void startGame();
     void endGame();
+    void refreshScore();
 };
 #endif // MAINWINDOW_H
