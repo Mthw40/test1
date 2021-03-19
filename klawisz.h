@@ -12,7 +12,7 @@ class Klawisz : public QObject, public QGraphicsPixmapItem
 {
 public:
     Klawisz();
-    void setSecond(); // druga tekstura klawisza
+    void released(); // druga tekstura klawisza
     void clicked();
 
 };

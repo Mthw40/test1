@@ -14,10 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     theme = new QMediaPlayer();
     kl1 = new Klawisz();
     kl2 = new Klawisz();
-    kl2->setSecond();
     kl3 = new Klawisz();
     kl4 = new Klawisz();
-    kl4->setSecond();
     //dodanie hitboxów nut dla poszczególnych klawiszy
     kl1_ok = new Ok();
     kl1_perfect = new Perfect();
@@ -40,11 +38,27 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
+        kl1->released();
 
+    }
+    if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
+        kl2->released();
+    }
+    if(event->key()==Qt::Key_J && inGame){ // 3. klawisz
+        kl3->released();
+    }
+    if(event->key()==Qt::Key_K && inGame){ // 4. klawisz
+        kl4->released();
+    }
+}
 void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 {
     if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
         kl1->clicked();
+
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();

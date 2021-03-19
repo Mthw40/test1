@@ -5,14 +5,16 @@ Klawisz::Klawisz()//1. tekstura
     setPixmap(QPixmap(":/new/prefix1/Zasoby/kl1.png"));
 }
 
-void Klawisz::setSecond()//2. tekstura
+void Klawisz::released()
 {
-    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl2.png"));
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl1.png"));
 }
+
+
 
 void Klawisz::clicked()
 {
-    //setPixmap(QPixmap("")); //tekstura klikniętego klawisza
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl2.png")); //tekstura klikniętego klawisza
 
 }
 
