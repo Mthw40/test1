@@ -118,6 +118,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         startGame();
         theme->stop();
     }
+    if(event->key()==Qt::Key_O && !inGame){
+        SongSelect SS;
+        SS.setModal(true);
+        SS.exec();
+    }
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
     }

@@ -15,6 +15,7 @@ SOURCES += \
     nuta.cpp \
     ok.cpp \
     perfect.cpp \
+    songselect.cpp \
     tlo.cpp
 
 HEADERS += \
@@ -23,10 +24,12 @@ HEADERS += \
     nuta.h \
     ok.h \
     perfect.h \
+    songselect.h \
     tlo.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    songselect.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

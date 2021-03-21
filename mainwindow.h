@@ -19,6 +19,7 @@
 #include "klawisz.h"
 #include "ok.h"
 #include "perfect.h"
+#include "songselect.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
