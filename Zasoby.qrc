@@ -10,5 +10,17 @@
         <file>Zasoby/key-press-4.wav</file>
         <file>Zasoby/menu.jpg</file>
         <file>Zasoby/cursor.png</file>
+        <file>Zasoby/hp_25.png</file>
+        <file>Zasoby/hp_50.png</file>
+        <file>Zasoby/hp_75.png</file>
+        <file>Zasoby/hp_full.png</file>
+        <file>Zasoby/key1.png</file>
+        <file>Zasoby/key2.png</file>
+        <file>Zasoby/miss.png</file>
+        <file>Zasoby/miss.wav</file>
+        <file>Zasoby/note1.png</file>
+        <file>Zasoby/ok.png</file>
+        <file>Zasoby/overlay.png</file>
+        <file>Zasoby/perfect.png</file>
     </qresource>
 </RCC>
