@@ -22,5 +22,7 @@
         <file>Zasoby/ok.png</file>
         <file>Zasoby/overlay.png</file>
         <file>Zasoby/perfect.png</file>
+        <file>Zasoby/ok_hitbox.png</file>
+        <file>Zasoby/perfect_hitbox.png</file>
     </qresource>
 </RCC>

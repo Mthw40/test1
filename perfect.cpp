@@ -3,8 +3,8 @@
 Perfect::Perfect()
 {
     player = new QMediaPlayer();
-    player->setMedia(QUrl("qrc:/new/prefix1/Zasoby/key-press-4.wav"));
-    setPixmap(QPixmap("")); //hitbox dla "Perfect"
+    player->setMedia(QUrl(""));
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/perfect_hitbox.png")); //hitbox dla "Perfect"
 }
 void Perfect::check()
 {

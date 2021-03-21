@@ -3,8 +3,8 @@
 Ok::Ok()
 {
     player = new QMediaPlayer();
-    player->setMedia(QUrl("qrc:/new/prefix1/Zasoby/key-press-4.wav"));
-    setPixmap(QPixmap("")); //hitbox dla "ok"
+    player->setMedia(QUrl(""));
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/ok_hitbox.png")); //hitbox dla "ok"
 }
 void Ok::check()
 {

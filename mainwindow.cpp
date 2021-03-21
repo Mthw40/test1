@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     QCursor c = QCursor(p,0,0);
     setCursor(c);
     inGame=false;
+    miss=true;
     tlo = new Tlo();
     scene = new QGraphicsScene();
     theme = new QMediaPlayer();
@@ -28,7 +29,16 @@ MainWindow::MainWindow(QWidget *parent)
     kl3_perfect = new Perfect();
     kl4_ok = new Ok();
     kl4_perfect = new Perfect();
+    utility = new Utility();
 
+    scene->addItem(kl1_ok); //dodanie hitboxów
+    scene->addItem(kl1_perfect);
+    scene->addItem(kl2_ok);
+    scene->addItem(kl2_perfect);
+    scene->addItem(kl3_ok);
+    scene->addItem(kl3_perfect);
+    scene->addItem(kl4_ok);
+    scene->addItem(kl4_perfect);
     scene->addItem(tlo); //dodanie tła do sceny
     ui->graphicsView->setScene(scene); //ustawienie sceny
 
@@ -64,11 +74,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         if(kl1_perfect->isChecked()){
             //score + perfect
             score+=100;
+            miss=false;
+            utility->showPerfect();
         }
         kl1_ok->check();
         if(kl1_ok->isChecked()){
             //score + ok
             score+=50;
+            miss=false;
+            utility->showOk();
         }
         refreshScore();
     }
@@ -78,11 +92,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         if(kl2_perfect->isChecked()){
             //score + perfect
             score+=100;
+            miss=false;
+            utility->showPerfect();
         }
         kl2_ok->check();
         if(kl2_ok->isChecked()){
             //score + ok
             score+=50;
+            miss=false;
+            utility->showOk();
         }
         refreshScore();
     }
@@ -92,11 +110,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         if(kl3_perfect->isChecked()){
             //score + perfect
             score+=100;
+            miss=false;
+            utility->showPerfect();
         }
         kl3_ok->check();
         if(kl3_ok->isChecked()){
             //score + ok
             score+=50;
+            miss=false;
+            utility->showOk();
         }
         refreshScore();
     }
@@ -106,14 +128,22 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         if(kl4_perfect->isChecked()){
             //score + perfect
             score+=100;
+            miss=false;
+            utility->showPerfect();
         }
         kl4_ok->check();
         if(kl4_ok->isChecked()){
             //score + ok
             score+=50;
+            miss=false;
+            utility->showOk();
         }
         refreshScore();
     }
+    if(miss && inGame){
+        missed();
+    }
+    miss=true;
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
         theme->stop();
@@ -126,50 +156,63 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
     }
-    if(event->key()==Qt::Key_N && inGame){
+    if(event->key()==Qt::Key_N && inGame){ //dodawanie nowej nuty
         nuta = new Nuta();
-        nuta->setPos(483,y());
+        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
+        nuta->setPos(430,y());
         scene->addItem(nuta);
     }
+}
+
+void MainWindow::missed()
+{
+    score-=10;
+    utility->showMiss();
 }
 
 void MainWindow::startGame()
 {
     tlo->lvl();
+    scene->addItem(utility);
+    inGame=true;
     score=0;
     //dodanie i ustawienie klawiszy w odpowiednich miejscach
     scene->addItem(kl1);
-    kl1->setPos(8,y()+800);
+    kl1->setPos(280,y()+915);
     scene->addItem(kl2);
-    kl2->setPos(483,y()+800);
+    kl2->setPos(430,y()+915);
     scene->addItem(kl3);
-    kl3->setPos(956,y()+800);
+    kl3->setPos(580,y()+915);
     scene->addItem(kl4);
-    kl4->setPos(1430,y()+800);
-    //dodanie i ustawienie hitboxów w odpowiednich miejscach !!!współrzędne y jeszcze nie są ustawione!!!
+    kl4->setPos(730,y()+915);
+    //ustawienie hitboxów w odpowiednich miejscach
+    kl1_ok->setPos(280,y()+780);
+    kl1_perfect->setPos(280,y()+840);
+    kl2_ok->setPos(430,y()+780);
+    kl2_perfect->setPos(430,y()+840);
+    kl3_ok->setPos(580,y()+780);
+    kl3_perfect->setPos(580,y()+840);
+    kl4_ok->setPos(730,y()+780);
+    kl4_perfect->setPos(730,y()+840);
     /*
-    scene->addItem(kl1_ok);
-    kl1_ok->setPos(8,y());
-    scene->addItem(kl1_perfect);
-    kl1_perfect->setPos(8,y());
-    scene->addItem(kl2_ok);
-    kl2_ok->setPos(483,y());
-    scene->addItem(kl2_perfect);
-    kl2_perfect->setPos(483,y());
-    scene->addItem(kl3_ok);
-    kl3_ok->setPos(956,y());
-    scene->addItem(kl3_perfect);
-    kl3_perfect->setPos(956,y());
-    scene->addItem(kl4_ok);
-    kl4_ok->setPos(1430,y());
-    scene->addItem(kl4_perfect);
-    kl4_perfect->setPos(1430,y());
-    */
-
-    //theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav")); //theme poziomu
+    QFileInfo fi("/Utwory/sample.txt");
+    QString songPath = fi.canonicalFilePath();
+    qDebug()<<songPath;
+    QFile song(songPath); //!!!później ścieżka z QSettings!!!
+    if(!song.open(QIODevice::ReadOnly)) {
+        QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
+    }
+    QTextStream in(&song);
+    BPM = (in.readLine()).toInt();
+    while (!in.atEnd()){
+        QString line = in.readLine();
+        QStringList l = line.split("");
+        qDebug()<<l;
+    }
+    //theme->setMedia(QUrl("")); //theme poziomu
     //theme->play();
-
-    inGame=true;
+    song.close();
+    */
 }
 
 void MainWindow::endGame()
@@ -180,4 +223,5 @@ void MainWindow::endGame()
 void MainWindow::refreshScore()
 {
     //ui->scoreLabel->setText("Wynik: "+score);
+    //qDebug()<<"Wyniki: "<<score;
 }

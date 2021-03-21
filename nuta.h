@@ -15,7 +15,8 @@ public:
     QTimer *timer;
 private slots:
     void onTimerTimeout();
-
+signals:
+    void bruh();
 };
 
 #endif // NUTA_H

@@ -14,12 +14,17 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QCursor>
+#include <QFile>
+#include <QTextStream>
+#include <QFileInfo>
+#include <QMessageBox>
 #include "tlo.h"
 #include "nuta.h"
 #include "klawisz.h"
 #include "ok.h"
 #include "perfect.h"
 #include "songselect.h"
+#include "utility.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -54,11 +59,16 @@ private:
     Perfect *kl2_perfect;
     Perfect *kl3_perfect;
     Perfect *kl4_perfect;
+    Utility *utility;
 
     bool inGame;
+    bool miss;
     int score;
+    int BPM;
     void startGame();
     void endGame();
     void refreshScore();
+private slots:
+    void missed();
 };
 #endif // MAINWINDOW_H

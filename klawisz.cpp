@@ -2,19 +2,21 @@
 
 Klawisz::Klawisz()//1. tekstura
 {
-    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl1.png"));
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/key1.png"));
     player=new QMediaPlayer;
+    player->setVolume(10);
 }
 
 void Klawisz::released()
 {
-    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl1.png"));
+    this->setPos(x(),y()+43);
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/key1.png"));
 }
 
 void Klawisz::clicked()
 {
-    setPixmap(QPixmap(":/new/prefix1/Zasoby/kl2.png")); //tekstura klikniętego klawisza
-
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/key2.png")); //tekstura klikniętego klawisza
+    this->setPos(x(),y()-43);
     random=QRandomGenerator::global()->bounded(1,5);
     switch(random)
     {

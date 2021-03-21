@@ -16,7 +16,8 @@ SOURCES += \
     ok.cpp \
     perfect.cpp \
     songselect.cpp \
-    tlo.cpp
+    tlo.cpp \
+    utility.cpp
 
 HEADERS += \
     klawisz.h \
@@ -25,7 +26,8 @@ HEADERS += \
     ok.h \
     perfect.h \
     songselect.h \
-    tlo.h
+    tlo.h \
+    utility.h
 
 FORMS += \
     mainwindow.ui \
