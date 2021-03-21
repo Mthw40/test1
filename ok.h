@@ -11,9 +11,7 @@ class Ok : public QObject, public QGraphicsPixmapItem
 public:
     Ok();
     QMediaPlayer *player;
-    void check();
-    bool isChecked();
-    bool checked;
+    bool check();
 };
 
 #endif // OK_H

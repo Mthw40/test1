@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCursor(c);
     inGame=false;
     miss=true;
+    score=0;
     tlo = new Tlo();
     scene = new QGraphicsScene();
     theme = new QMediaPlayer();
@@ -70,15 +71,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
 {
     if(event->key()==Qt::Key_D && inGame){ // 1. klawisz
         kl1->clicked();
-        kl1_perfect->check();
-        if(kl1_perfect->isChecked()){
+        if(kl1_perfect->check()){
             //score + perfect
             score+=100;
             miss=false;
             utility->showPerfect();
         }
-        kl1_ok->check();
-        if(kl1_ok->isChecked()){
+        if(kl1_ok->check()){
             //score + ok
             score+=50;
             miss=false;
@@ -88,15 +87,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();
-        kl2_perfect->check();
-        if(kl2_perfect->isChecked()){
+        if(kl2_perfect->check()){
             //score + perfect
             score+=100;
             miss=false;
             utility->showPerfect();
         }
-        kl2_ok->check();
-        if(kl2_ok->isChecked()){
+        if(kl2_ok->check()){
             //score + ok
             score+=50;
             miss=false;
@@ -106,15 +103,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_J && inGame){ // 3. klawisz
         kl3->clicked();
-        kl3_perfect->check();
-        if(kl3_perfect->isChecked()){
+        if(kl3_perfect->check()){
             //score + perfect
             score+=100;
             miss=false;
             utility->showPerfect();
         }
-        kl3_ok->check();
-        if(kl3_ok->isChecked()){
+        if(kl3_ok->check()){
             //score + ok
             score+=50;
             miss=false;
@@ -124,15 +119,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_K && inGame){ // 4. klawisz
         kl4->clicked();
-        kl4_perfect->check();
-        if(kl4_perfect->isChecked()){
+        if(kl4_perfect->check()){
             //score + perfect
             score+=100;
             miss=false;
             utility->showPerfect();
         }
-        kl4_ok->check();
-        if(kl4_ok->isChecked()){
+        if(kl4_ok->check()){
             //score + ok
             score+=50;
             miss=false;
@@ -155,12 +148,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
-    }
-    if(event->key()==Qt::Key_N && inGame){ //dodawanie nowej nuty
-        nuta = new Nuta();
-        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
-        nuta->setPos(430,y());
-        scene->addItem(nuta);
     }
 }
 
@@ -194,26 +181,60 @@ void MainWindow::startGame()
     kl3_perfect->setPos(580,y()+840);
     kl4_ok->setPos(730,y()+780);
     kl4_perfect->setPos(730,y()+840);
-    /*
-    QFileInfo fi("/Utwory/sample.txt");
-    QString songPath = fi.canonicalFilePath();
-    qDebug()<<songPath;
-    QFile song(songPath); //!!!później ścieżka z QSettings!!!
-    if(!song.open(QIODevice::ReadOnly)) {
+    //!!! odczytanie pliku utworu z odpowiedniego pliku .txt (nie skończone) !!!
+    QSettings settings("TheTwatSquad","SuperGra");
+    settings.beginGroup("Level");
+    //ustawienie odpowiedniego utworu
+    if(settings.value("Id").toInt()==1){ //
+        theme->setMedia(QUrl(""));
+    }
+    else if(settings.value("Id").toInt()==1){
+        theme->setMedia(QUrl(""));
+    }
+    theme->play();
+    QString songPath=settings.value("Song").toString(); //!!! odczyt z pliku zawiera krytyczne błędy !!!
+    QFile song(songPath);
+    if(!song.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
     }
     QTextStream in(&song);
-    BPM = (in.readLine()).toInt();
-    while (!in.atEnd()){
-        QString line = in.readLine();
-        QStringList l = line.split("");
-        qDebug()<<l;
+    BPM = in.readLine().toInt();
+    while (!in.atEnd()){ //odczyt z pliku oraz dodawanie nut
+        line = in.readLine();
+        QTimer::singleShot(1000/(BPM/60),this,SLOT(beat()));
+        qDebug()<<line;
     }
-    //theme->setMedia(QUrl("")); //theme poziomu
-    //theme->play();
     song.close();
-    */
+
 }
+void MainWindow::beat()
+{
+    if(line[0]=="*"){
+        nuta = new Nuta();
+        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
+        nuta->setPos(280,y());
+        scene->addItem(nuta);
+    }
+    if(line[1]=="*"){
+        nuta = new Nuta();
+        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
+        nuta->setPos(430,y());
+        scene->addItem(nuta);
+    }
+    if(line[2]=="*"){
+        nuta = new Nuta();
+        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
+        nuta->setPos(580,y());
+        scene->addItem(nuta);
+    }
+    if(line[3]=="*"){
+        nuta = new Nuta();
+        connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
+        nuta->setPos(730,y());
+        scene->addItem(nuta);
+    }
+}
+
 
 void MainWindow::endGame()
 {
@@ -222,6 +243,5 @@ void MainWindow::endGame()
 
 void MainWindow::refreshScore()
 {
-    //ui->scoreLabel->setText("Wynik: "+score);
-    //qDebug()<<"Wyniki: "<<score;
+    ui->Score->setText("Wynik: "+QString::number(score));
 }

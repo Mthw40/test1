@@ -2,6 +2,8 @@
 #define SONGSELECT_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QSettings>
 
 namespace Ui {
 class SongSelect;
@@ -15,8 +17,13 @@ public:
     explicit SongSelect(QWidget *parent = nullptr);
     ~SongSelect();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::SongSelect *ui;
+    QString path;
+    int id;
 };
 
 #endif // SONGSELECT_H

@@ -65,10 +65,12 @@ private:
     bool miss;
     int score;
     int BPM;
+    QString line;
     void startGame();
     void endGame();
     void refreshScore();
 private slots:
     void missed();
+    void beat();
 };
 #endif // MAINWINDOW_H

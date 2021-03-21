@@ -11,9 +11,7 @@ class Perfect : public QObject, public QGraphicsPixmapItem
 public:
     Perfect();
     QMediaPlayer *player;
-    void check();
-    bool isChecked();
-    bool checked;
+    bool check();
 };
 
 #endif // PERFECT_H
