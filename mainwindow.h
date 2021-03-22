@@ -16,7 +16,7 @@
 #include <QCursor>
 #include <QFile>
 #include <QTextStream>
-#include <QFileInfo>
+#include <QList>
 #include <QMessageBox>
 #include "tlo.h"
 #include "nuta.h"
@@ -46,6 +46,9 @@ private:
     Tlo *tlo;
     QGraphicsScene *scene;
     QMediaPlayer *theme;
+    QFile song;
+    QTimer *tempo;
+    QList<QString> content;
     Nuta *nuta;
     Klawisz *kl1;
     Klawisz *kl2;
@@ -63,13 +66,11 @@ private:
 
     bool inGame;
     bool miss;
-    bool read;
+    int index;
     int score;
     int BPM;
     QString line;
     QString songPath;
-    QFile song;
-    QTimer *tempo;
     void startGame();
     void refreshScore();
 private slots:

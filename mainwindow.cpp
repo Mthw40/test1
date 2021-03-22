@@ -13,8 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     setCursor(c);
     inGame=false;
     miss=true;
-    read=true;
-    score=0;
     tlo = new Tlo();
     scene = new QGraphicsScene();
     theme = new QMediaPlayer();
@@ -141,7 +139,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     miss=true;
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
-        theme->stop();
     }
     if(event->key()==Qt::Key_O && !inGame){
         SongSelect SS;
@@ -165,6 +162,7 @@ void MainWindow::startGame()
     scene->addItem(utility);
     inGame=true;
     score=0;
+    index=0;
     //dodanie i ustawienie klawiszy w odpowiednich miejscach
     scene->addItem(kl1);
     kl1->setPos(280,y()+915);
@@ -183,36 +181,38 @@ void MainWindow::startGame()
     kl3_perfect->setPos(580,y()+840);
     kl4_ok->setPos(730,y()+780);
     kl4_perfect->setPos(730,y()+840);
-    //!!! odczytanie pliku utworu z odpowiedniego pliku .txt (nie skończone) !!!
+    //ustawienie odpowiedniego utworu
     QSettings settings("TheTwatSquad","SuperGra");
     settings.beginGroup("Level");
-    //ustawienie odpowiedniego utworu
     if(settings.value("Id").toInt()==1){ //
-        theme->setMedia(QUrl(""));
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/Amogus.mp3"));
     }
-    else if(settings.value("Id").toInt()==1){
+    else if(settings.value("Id").toInt()==2){
         theme->setMedia(QUrl(""));
     }
     theme->play();
     songPath=settings.value("Song").toString();
     settings.endGroup();
-
+    //odczytanie pliku utworu z odpowiedniego pliku .txt
     QFile song(songPath);
     if(!song.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
     }
     BPM = song.readLine().toInt();
     qDebug()<<BPM;
+    while(!song.atEnd()){
+        content.append(song.readLine());
+    }
     tempo->start(1000/(BPM/60));
 }
 void MainWindow::beat()
 {
-    line = song.readLine();
-    if(line==""){
+    if(index==content.count()){ //koniec utworu
         song.close();
         QTimer::singleShot(4000,this,SLOT(endGame()));
         return;
     }
+    line = content[index];
     if(line[0]=="*"){
         nuta = new Nuta();
         connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
@@ -237,13 +237,14 @@ void MainWindow::beat()
         nuta->setPos(730,y());
         scene->addItem(nuta);
     }
-    //QTimer::singleShot(1000/(BPM/60),this,SLOT(beat()));
+    index++;
 }
 
 
 void MainWindow::endGame()
 {
-    read=true;
+    tempo->stop();
+    index=0;
     inGame=false;
 }
 
