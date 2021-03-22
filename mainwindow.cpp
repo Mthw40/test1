@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCursor(c);
     inGame=false;
     miss=true;
+    read=true;
     score=0;
     tlo = new Tlo();
     scene = new QGraphicsScene();
@@ -46,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent)
     theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav"));//menu theme
     theme->setVolume(100);
     theme->play();
+
+    tempo = new QTimer(this);
+    connect(tempo,SIGNAL(timeout()),this,SLOT(beat()));
 }
 
 MainWindow::~MainWindow()
@@ -83,7 +87,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
             miss=false;
             utility->showOk();
         }
-        refreshScore();
     }
     if(event->key()==Qt::Key_F && inGame){ // 2. klawisz
         kl2->clicked();
@@ -99,7 +102,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
             miss=false;
             utility->showOk();
         }
-        refreshScore();
     }
     if(event->key()==Qt::Key_J && inGame){ // 3. klawisz
         kl3->clicked();
@@ -115,7 +117,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
             miss=false;
             utility->showOk();
         }
-        refreshScore();
     }
     if(event->key()==Qt::Key_K && inGame){ // 4. klawisz
         kl4->clicked();
@@ -136,6 +137,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     if(miss && inGame){
         missed();
     }
+    refreshScore();
     miss=true;
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
@@ -192,23 +194,24 @@ void MainWindow::startGame()
         theme->setMedia(QUrl(""));
     }
     theme->play();
-    QString songPath=settings.value("Song").toString(); //!!! odczyt z pliku zawiera krytyczne błędy !!!
+    songPath=settings.value("Song").toString();
+    settings.endGroup();
+
     QFile song(songPath);
     if(!song.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
     }
-    QTextStream in(&song);
-    BPM = in.readLine().toInt();
-    while (!in.atEnd()){ //odczyt z pliku oraz dodawanie nut
-        line = in.readLine();
-        QTimer::singleShot(1000/(BPM/60),this,SLOT(beat()));
-        qDebug()<<line;
-    }
-    song.close();
-
+    BPM = song.readLine().toInt();
+    //tempo->start(1000/(BPM/60));
 }
 void MainWindow::beat()
 {
+    //line = song.readLine();
+    if(line==""){
+        song.close();
+        QTimer::singleShot(4000,this,SLOT(endGame()));
+        return;
+    }
     if(line[0]=="*"){
         nuta = new Nuta();
         connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
@@ -233,11 +236,13 @@ void MainWindow::beat()
         nuta->setPos(730,y());
         scene->addItem(nuta);
     }
+    //QTimer::singleShot(1000/(BPM/60),this,SLOT(beat()));
 }
 
 
 void MainWindow::endGame()
 {
+    read=true;
     inGame=false;
 }
 

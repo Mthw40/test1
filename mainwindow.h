@@ -63,14 +63,18 @@ private:
 
     bool inGame;
     bool miss;
+    bool read;
     int score;
     int BPM;
     QString line;
+    QString songPath;
+    QFile song;
+    QTimer *tempo;
     void startGame();
-    void endGame();
     void refreshScore();
 private slots:
     void missed();
     void beat();
+    void endGame();
 };
 #endif // MAINWINDOW_H

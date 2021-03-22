@@ -7,6 +7,11 @@ SongSelect::SongSelect(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QPixmap p = QPixmap(":/new/prefix1/Zasoby/cursor.png");
+    QCursor c = QCursor(p,0,0);
+    setCursor(c);
+    setFixedSize(size());
+
     QSettings settings("TheTwatSquad","SuperGra");
     settings.beginGroup("Level");
     //zaznaczenie checkboxa, którego piosenka jest aktualnie wybrana
@@ -27,7 +32,7 @@ SongSelect::~SongSelect()
 void SongSelect::on_buttonBox_accepted()
 {
     if(ui->option1->isChecked()){
-        path="D:/Projekty/Qt Projects/coop/test1/Tracks/AmongDrip.txt"; // !względna! ścieżka do pliku txt piosenki
+        path="D:\\Projekty\\Qt Projects\\coop\\test1\\Tracks\\AmongDrip.txt"; // !względna! ścieżka do pliku txt piosenki
         id=1;
     }
     else if(ui->option2->isChecked()){

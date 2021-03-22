@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <QSettings>
+#include <QCursor>
 
 namespace Ui {
 class SongSelect;

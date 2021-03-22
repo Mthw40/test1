@@ -2,7 +2,7 @@
 
 Utility::Utility()
 {
-    this->setPos(1300,500);
+    this->setPos(475,500);
 }
 
 void Utility::showPerfect()
