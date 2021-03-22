@@ -132,12 +132,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
             miss=false;
             utility->showOk();
         }
-        refreshScore();
+
     }
     if(miss && inGame){
         missed();
     }
-    refreshScore();
+    if(inGame)refreshScore();
     miss=true;
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
@@ -202,11 +202,12 @@ void MainWindow::startGame()
         QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
     }
     BPM = song.readLine().toInt();
-    //tempo->start(1000/(BPM/60));
+    qDebug()<<BPM;
+    tempo->start(1000/(BPM/60));
 }
 void MainWindow::beat()
 {
-    //line = song.readLine();
+    line = song.readLine();
     if(line==""){
         song.close();
         QTimer::singleShot(4000,this,SLOT(endGame()));

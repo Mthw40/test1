@@ -32,7 +32,7 @@ SongSelect::~SongSelect()
 void SongSelect::on_buttonBox_accepted()
 {
     if(ui->option1->isChecked()){
-        path="D:\\Projekty\\Qt Projects\\coop\\test1\\Tracks\\AmongDrip.txt"; // !względna! ścieżka do pliku txt piosenki
+        path=":/new/prefix1/Zasoby/Tracks/AmongDrip.txt"; // !względna! ścieżka do pliku txt piosenki
         id=1;
     }
     else if(ui->option2->isChecked()){

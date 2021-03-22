@@ -24,5 +24,6 @@
         <file>Zasoby/perfect.png</file>
         <file>Zasoby/ok_hitbox.png</file>
         <file>Zasoby/perfect_hitbox.png</file>
+        <file>Zasoby/Tracks/AmongDrip.txt</file>
     </qresource>
 </RCC>
