@@ -9,8 +9,8 @@ Hp::Hp()
 
 void Hp::changebar(int a)
 {
-    change = change+a;
-
+    if(change+a>4)return;
+    change=change+a;
     if(change==4)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_full.png"));
@@ -26,6 +26,11 @@ void Hp::changebar(int a)
     if(change==1)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_25.png"));
+    }
+    if(change==0)
+    {
+        emit gitgud();
+        //setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_0.png"));
     }
 
 }

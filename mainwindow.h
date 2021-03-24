@@ -77,5 +77,6 @@ private slots:
     void missed();
     void beat();
     void endGame();
+    void won();
 };
 #endif // MAINWINDOW_H

@@ -16,3 +16,13 @@ void Tlo::lvl()
     //!!!do tworzenia tła poziomu używać tej samej rozdzielczości!!!
 }
 
+void Tlo::fail()
+{
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/fail.jpg"));
+}
+
+void Tlo::win()
+{
+    setPixmap(QPixmap(":/new/prefix1/Zasoby/win.jpg"));
+}
+

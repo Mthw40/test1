@@ -11,6 +11,8 @@ public:
     Tlo();
     void showMenu();
     void lvl();
+    void fail();
+    void win();
 };
 
 #endif // TLO_H

@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     kl3 = new Klawisz();
     kl4 = new Klawisz();
     hpbar = new Hp();
+    connect(hpbar,SIGNAL(gitgud()),this,SLOT(endGame()));
     //dodanie hitboxów nut dla poszczególnych klawiszy
     kl1_ok = new Ok();
     kl1_perfect = new Perfect();
@@ -41,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     kl3_perfect->setPos(580,y()+850);
     kl4_ok->setPos(730,y()+800);
     kl4_perfect->setPos(730,y()+850);
-     //dodanie hitboxów
+    //dodanie hitboxów
     scene->addItem(kl1_ok);
     scene->addItem(kl1_perfect);
     scene->addItem(kl2_ok);
@@ -164,6 +165,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     if(event->key()==Qt::Key_Q){
         QApplication::quit();
     }
+    if(event->key()==Qt::Key_M && !inGame){
+        tlo->showMenu();
+    }
 }
 
 void MainWindow::missed()
@@ -218,10 +222,12 @@ void MainWindow::beat()
 {
     if(index==content.count()){ //koniec utworu
         song.close();
-        QTimer::singleShot(4000,this,SLOT(endGame()));
+        QTimer::singleShot(4000,this,SLOT(won()));
         return;
     }
     line = content[index];
+    index++;
+    if(line.size()<4) return;
     if(line[0]=="*"){
         nuta = new Nuta();
         connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
@@ -246,13 +252,39 @@ void MainWindow::beat()
         nuta->setPos(730,y());
         scene->addItem(nuta);
     }
-    index++;
 }
 
 
 void MainWindow::endGame()
 {
+    ui->Score->setText("");
+    hpbar->changebar(4);
+    scene->removeItem(utility);
+    scene->removeItem(hpbar);
+    scene->removeItem(kl1);
+    scene->removeItem(kl2);
+    scene->removeItem(kl3);
+    scene->removeItem(kl4);
+    theme->stop();
     tempo->stop();
+    tlo->fail();
+    index=0;
+    inGame=false;
+}
+
+void MainWindow::won()
+{
+    ui->Score->setText("");
+    hpbar->changebar(4);
+    scene->removeItem(utility);
+    scene->removeItem(hpbar);
+    scene->removeItem(kl1);
+    scene->removeItem(kl2);
+    scene->removeItem(kl3);
+    scene->removeItem(kl4);
+    theme->stop();
+    tempo->stop();
+    tlo->win();
     index=0;
     inGame=false;
 }
