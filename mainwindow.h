@@ -25,7 +25,7 @@
 #include "perfect.h"
 #include "songselect.h"
 #include "utility.h"
-
+#include "hp.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -63,7 +63,7 @@ private:
     Perfect *kl3_perfect;
     Perfect *kl4_perfect;
     Utility *utility;
-
+    Hp *hpbar;
     bool inGame;
     bool miss;
     int index;

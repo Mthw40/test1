@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     kl2 = new Klawisz();
     kl3 = new Klawisz();
     kl4 = new Klawisz();
+    hpbar = new Hp();
     //dodanie hitboxów nut dla poszczególnych klawiszy
     kl1_ok = new Ok();
     kl1_perfect = new Perfect();
@@ -31,7 +32,17 @@ MainWindow::MainWindow(QWidget *parent)
     kl4_perfect = new Perfect();
     utility = new Utility();
 
-    scene->addItem(kl1_ok); //dodanie hitboxów
+    //ustawienie hitboxów w odpowiednich miejscach
+    kl1_ok->setPos(280,y()+800);
+    kl1_perfect->setPos(280,y()+850);
+    kl2_ok->setPos(430,y()+800);
+    kl2_perfect->setPos(430,y()+850);
+    kl3_ok->setPos(580,y()+800);
+    kl3_perfect->setPos(580,y()+850);
+    kl4_ok->setPos(730,y()+800);
+    kl4_perfect->setPos(730,y()+850);
+     //dodanie hitboxów
+    scene->addItem(kl1_ok);
     scene->addItem(kl1_perfect);
     scene->addItem(kl2_ok);
     scene->addItem(kl2_perfect);
@@ -134,8 +145,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(miss && inGame){
         missed();
+        hpbar->changebar(-1);
     }
-    if(inGame)refreshScore();
+    if(inGame && !miss)
+    {
+        refreshScore();
+        hpbar->changebar(1);
+    }
     miss=true;
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
@@ -160,6 +176,7 @@ void MainWindow::startGame()
 {
     tlo->lvl();
     scene->addItem(utility);
+    scene->addItem(hpbar);
     inGame=true;
     score=0;
     index=0;
@@ -172,15 +189,7 @@ void MainWindow::startGame()
     kl3->setPos(580,y()+915);
     scene->addItem(kl4);
     kl4->setPos(730,y()+915);
-    //ustawienie hitboxów w odpowiednich miejscach
-    kl1_ok->setPos(280,y()+780);
-    kl1_perfect->setPos(280,y()+840);
-    kl2_ok->setPos(430,y()+780);
-    kl2_perfect->setPos(430,y()+840);
-    kl3_ok->setPos(580,y()+780);
-    kl3_perfect->setPos(580,y()+840);
-    kl4_ok->setPos(730,y()+780);
-    kl4_perfect->setPos(730,y()+840);
+
     //ustawienie odpowiedniego utworu
     QSettings settings("TheTwatSquad","SuperGra");
     settings.beginGroup("Level");

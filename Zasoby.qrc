@@ -22,9 +22,9 @@
         <file>Zasoby/ok.png</file>
         <file>Zasoby/overlay.png</file>
         <file>Zasoby/perfect.png</file>
-        <file>Zasoby/ok_hitbox.png</file>
-        <file>Zasoby/perfect_hitbox.png</file>
         <file>Zasoby/Tracks/AmongDrip.txt</file>
         <file>Zasoby/Tracks/Amogus.mp3</file>
+        <file>Zasoby/ok_hitbox.png</file>
+        <file>Zasoby/perfect_hitbox.png</file>
     </qresource>
 </RCC>
