@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Wybór utworu</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Zasoby.qrc">
+    <normaloff>:/new/prefix1/Zasoby/icon.png</normaloff>:/new/prefix1/Zasoby/icon.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
 	background-color:gray;
@@ -121,7 +125,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Zasoby.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

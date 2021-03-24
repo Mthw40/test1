@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     showFullScreen();
-
+    miss_sound = new QMediaPlayer;
     QPixmap p = QPixmap(":/new/prefix1/Zasoby/cursor.png");
     QCursor c = QCursor(p,0,0);
     setCursor(c);
@@ -146,7 +146,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(miss && inGame){
         missed();
-        hpbar->changebar(-1);
+
     }
     if(inGame && !miss)
     {
@@ -167,13 +167,25 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     }
     if(event->key()==Qt::Key_M && !inGame){
         tlo->showMenu();
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav"));//menu theme
+        theme->setVolume(100);
+        theme->play();
     }
+
+     if(event->key()==Qt::Key_E && !inGame){ // E - Credits
+        Credits CC;
+        CC.setModal(true);
+        CC.exec();
+     }
 }
 
 void MainWindow::missed()
 {
     score-=10;
     utility->showMiss();
+    hpbar->changebar(-1);
+    miss_sound->setMedia(QUrl("qrc:/new/prefix1/Zasoby/miss.wav"));
+    miss_sound->play();
 }
 
 void MainWindow::startGame()
@@ -181,6 +193,7 @@ void MainWindow::startGame()
     tlo->lvl();
     scene->addItem(utility);
     scene->addItem(hpbar);
+    hpbar->changebar(0);
     inGame=true;
     score=0;
     index=0;
@@ -220,7 +233,8 @@ void MainWindow::startGame()
 }
 void MainWindow::beat()
 {
-    if(index==content.count()){ //koniec utworu
+    if(index==content.count()-1){ //koniec utworu
+        tempo->stop();
         song.close();
         QTimer::singleShot(4000,this,SLOT(won()));
         return;
@@ -266,14 +280,19 @@ void MainWindow::endGame()
     scene->removeItem(kl3);
     scene->removeItem(kl4);
     theme->stop();
-    tempo->stop();
+    theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/fail_music.mp3"));//fail theme
+    theme->setVolume(100);
+    theme->play();
     tlo->fail();
     index=0;
+    content.clear();
     inGame=false;
+
 }
 
 void MainWindow::won()
 {
+
     ui->Score->setText("");
     hpbar->changebar(4);
     scene->removeItem(utility);
@@ -283,10 +302,14 @@ void MainWindow::won()
     scene->removeItem(kl3);
     scene->removeItem(kl4);
     theme->stop();
-    tempo->stop();
+    theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/victory_music.mp3"));//victory theme
+    theme->setVolume(100);
+    theme->play();
     tlo->win();
     index=0;
+    content.clear();
     inGame=false;
+
 }
 
 void MainWindow::refreshScore()

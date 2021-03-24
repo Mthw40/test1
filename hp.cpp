@@ -10,7 +10,9 @@ Hp::Hp()
 void Hp::changebar(int a)
 {
     if(change+a>4)return;
-    change=change+a;
+        change=change+a;
+    if(change>4)
+        change=4;
     if(change==4)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_full.png"));

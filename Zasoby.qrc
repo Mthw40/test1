@@ -28,5 +28,8 @@
         <file>Zasoby/perfect_hitbox.png</file>
         <file>Zasoby/fail.jpg</file>
         <file>Zasoby/win.jpg</file>
+        <file>Zasoby/fail_music.mp3</file>
+        <file>Zasoby/victory_music.mp3</file>
+        <file>Zasoby/icon.png</file>
     </qresource>
 </RCC>

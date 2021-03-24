@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Gra</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Zasoby.qrc">
+    <normaloff>:/new/prefix1/Zasoby/icon.png</normaloff>:/new/prefix1/Zasoby/icon.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
@@ -72,6 +76,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Zasoby.qrc"/>
+ </resources>
  <connections/>
 </ui>

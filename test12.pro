@@ -9,6 +9,7 @@ CONFIG += c++11 resources_big
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    credits.cpp \
     hp.cpp \
     klawisz.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     utility.cpp
 
 HEADERS += \
+    credits.h \
     hp.h \
     klawisz.h \
     mainwindow.h \
@@ -32,6 +34,7 @@ HEADERS += \
     utility.h
 
 FORMS += \
+    credits.ui \
     mainwindow.ui \
     songselect.ui
 

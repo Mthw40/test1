@@ -26,6 +26,8 @@
 #include "songselect.h"
 #include "utility.h"
 #include "hp.h"
+#include "credits.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -44,6 +46,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     Tlo *tlo;
+    QMediaPlayer *miss_sound;
     QGraphicsScene *scene;
     QMediaPlayer *theme;
     QFile song;
