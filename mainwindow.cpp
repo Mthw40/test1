@@ -214,7 +214,7 @@ void MainWindow::startGame()
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/Amogus.mp3"));
     }
     else if(settings.value("Id").toInt()==2){
-        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/La Passion.wav"));
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/chug_jug.wav"));
     }
     else if(settings.value("Id").toInt()==3){
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/chacha.wav"));

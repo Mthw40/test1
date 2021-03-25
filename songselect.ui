@@ -111,7 +111,7 @@
     <rect>
      <x>40</x>
      <y>120</y>
-     <width>141</width>
+     <width>201</width>
      <height>21</height>
     </rect>
    </property>
@@ -121,7 +121,7 @@
     </font>
    </property>
    <property name="text">
-    <string>La Passion</string>
+    <string>Chug Jug with You</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="option3">

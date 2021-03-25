@@ -39,7 +39,7 @@ void SongSelect::on_buttonBox_accepted()
         id=1;
     }
     else if(ui->option2->isChecked()){
-        path=":/new/prefix1/Zasoby/Tracks/La Passion.txt";
+        path=":/new/prefix1/Zasoby/Tracks/chug_jug.txt";
         id=2;
     }
     else if(ui->option3->isChecked()){
