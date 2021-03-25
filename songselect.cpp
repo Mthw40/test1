@@ -43,7 +43,7 @@ void SongSelect::on_buttonBox_accepted()
         id=2;
     }
     else if(ui->option3->isChecked()){
-        path=":/new/prefix1/Zasoby/Tracks/EEEAAAOOO.txt";
+        path=":/new/prefix1/Zasoby/Tracks/chacha.txt";
         id=3;
     }
     QSettings settings("TheTwatSquad","SuperGra");

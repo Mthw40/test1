@@ -217,7 +217,7 @@ void MainWindow::startGame()
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/La Passion.wav"));
     }
     else if(settings.value("Id").toInt()==3){
-        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/EEEAAAOOO.wav"));
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/chacha.wav"));
     }
     theme->play();
     //ustawienie ścieżki utworu
