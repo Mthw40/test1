@@ -124,6 +124,24 @@
     <string>Sample</string>
    </property>
   </widget>
+  <widget class="QRadioButton" name="option3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>150</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Sample</string>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="Zasoby.qrc"/>

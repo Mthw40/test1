@@ -12,7 +12,6 @@ Credits::Credits(QWidget *parent) :
     QCursor c = QCursor(p,0,0);
     setCursor(c);
     setFixedSize(size());
-    setFixedSize(size());
 }
 
 Credits::~Credits()

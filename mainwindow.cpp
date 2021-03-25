@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     kl3 = new Klawisz();
     kl4 = new Klawisz();
     hpbar = new Hp();
-    connect(hpbar,SIGNAL(gitgud()),this,SLOT(endGame()));
+    connect(hpbar,SIGNAL(gitgud()),this,SLOT(endGame())); //sygnał, który kończy grę w przypadku spadku paska życia do 0
     //dodanie hitboxów nut dla poszczególnych klawiszy
     kl1_ok = new Ok();
     kl1_perfect = new Perfect();
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav"));//menu theme
     theme->setVolume(100);
     theme->play();
-
+    //timer odpowiadający za spadanie nut odpowiednio do BPMu
     tempo = new QTimer(this);
     connect(tempo,SIGNAL(timeout()),this,SLOT(beat()));
 }
@@ -144,11 +144,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
         }
 
     }
-    if(miss && inGame){
+    if(miss && inGame){ //nie trafiono w nutę
         missed();
-
     }
-    if(inGame && !miss)
+    if(inGame && !miss) //odświerzenie wyniku i paska życia w przypadku trafienia w nutę
     {
         refreshScore();
         hpbar->changebar(1);
@@ -157,15 +156,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event) //zczytanie z klawiatury
     if(event->key()==Qt::Key_P && !inGame){ // Zacznij grę
         startGame();
     }
-    if(event->key()==Qt::Key_O && !inGame){
+    if(event->key()==Qt::Key_O && !inGame){ // Wybór utworu
         SongSelect SS;
         SS.setModal(true);
         SS.exec();
     }
-    if(event->key()==Qt::Key_Q){
+    if(event->key()==Qt::Key_Q){ // Wyjście
         QApplication::quit();
     }
-    if(event->key()==Qt::Key_M && !inGame){
+    if(event->key()==Qt::Key_M && !inGame){ // Powrót do menu
         tlo->showMenu();
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/MainTheme.wav"));//menu theme
         theme->setVolume(100);
@@ -210,22 +209,26 @@ void MainWindow::startGame()
     //ustawienie odpowiedniego utworu
     QSettings settings("TheTwatSquad","SuperGra");
     settings.beginGroup("Level");
-    if(settings.value("Id").toInt()==1){ //
+    //ścieżka dźwiękowa dla wybranego poziomu
+    if(settings.value("Id").toInt()==1){
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/Amogus.mp3"));
     }
     else if(settings.value("Id").toInt()==2){
         theme->setMedia(QUrl(""));
     }
+    else if(settings.value("Id").toInt()==3){
+        theme->setMedia(QUrl(""));
+    }
     theme->play();
+    //ustawienie ścieżki utworu
     songPath=settings.value("Song").toString();
     settings.endGroup();
-    //odczytanie pliku utworu z odpowiedniego pliku .txt
+    //odczytanie pliku utworu z odpowiedniego pliku .txt oraz zapisanie go do QList
     QFile song(songPath);
     if(!song.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(0,"Błąd","Błąd odczytu z pliku!");
     }
     BPM = song.readLine().toInt();
-    qDebug()<<BPM;
     while(!song.atEnd()){
         content.append(song.readLine());
     }
@@ -233,15 +236,14 @@ void MainWindow::startGame()
 }
 void MainWindow::beat()
 {
-    if(index==content.count()-1){ //koniec utworu
-        tempo->stop();
-        song.close();
-        QTimer::singleShot(4000,this,SLOT(won()));
+    if(index==content.count()){ //koniec utworu
+        won();
         return;
     }
-    line = content[index];
+    line=content[index];
     index++;
     if(line.size()<4) return;
+    //tworzenie układu nut dla danej linii
     if(line[0]=="*"){
         nuta = new Nuta();
         connect(nuta,SIGNAL(bruh()),this,SLOT(missed()));
@@ -268,33 +270,31 @@ void MainWindow::beat()
     }
 }
 
-
-void MainWindow::endGame()
+void MainWindow::endGame() //przegrana
 {
-    ui->Score->setText("");
-    hpbar->changebar(4);
+    tempo->stop();
+    song.close();
+    hpbar->changebar(8); //uzupełnienie paska życia
     scene->removeItem(utility);
     scene->removeItem(hpbar);
     scene->removeItem(kl1);
     scene->removeItem(kl2);
     scene->removeItem(kl3);
     scene->removeItem(kl4);
-    theme->stop();
-    theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/fail_music.mp3"));//fail theme
-    theme->setVolume(100);
+    ui->Score->setText("");
+    theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/fail_music.mp3")); //fail theme
     theme->play();
     tlo->fail();
-    index=0;
     content.clear();
     inGame=false;
-
 }
 
-void MainWindow::won()
+void MainWindow::won() //wygrana
 {
-
+    tempo->stop();
+    song.close();
     ui->Score->setText("");
-    hpbar->changebar(4);
+    hpbar->changebar(8);
     scene->removeItem(utility);
     scene->removeItem(hpbar);
     scene->removeItem(kl1);
@@ -303,10 +303,8 @@ void MainWindow::won()
     scene->removeItem(kl4);
     theme->stop();
     theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/victory_music.mp3"));//victory theme
-    theme->setVolume(100);
     theme->play();
     tlo->win();
-    index=0;
     content.clear();
     inGame=false;
 

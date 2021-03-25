@@ -21,6 +21,9 @@ SongSelect::SongSelect(QWidget *parent) :
     else if(settings.value("Id").toInt()==2){
         ui->option2->setChecked(true);
     }
+    else if(settings.value("Id").toInt()==3){
+        ui->option3->setChecked(true);
+    }
     settings.endGroup();
 }
 
@@ -39,7 +42,10 @@ void SongSelect::on_buttonBox_accepted()
         path="";
         id=2;
     }
-
+    else if(ui->option3->isChecked()){
+        path="";
+        id=3;
+    }
     QSettings settings("TheTwatSquad","SuperGra");
     settings.beginGroup("Level");
     settings.setValue("Song",path);

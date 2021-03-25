@@ -7,7 +7,7 @@ Klawisz::Klawisz()//1. tekstura
     player->setVolume(10);
 }
 
-void Klawisz::released()
+void Klawisz::released() //powrót default tekstury klawisza
 {
     this->setPos(x(),y()+43);
     setPixmap(QPixmap(":/new/prefix1/Zasoby/key1.png"));

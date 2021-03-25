@@ -25,4 +25,3 @@ void Tlo::win()
 {
     setPixmap(QPixmap(":/new/prefix1/Zasoby/win.jpg"));
 }
-

@@ -2,37 +2,34 @@
 
 Hp::Hp()
 {
-    change = 4;
+    change = 8;
     this->setPos(910,y()+360);
     setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_full.png"));
 }
 
 void Hp::changebar(int a)
 {
-    if(change+a>4)return;
-        change=change+a;
-    if(change>4)
-        change=4;
-    if(change==4)
+    change=change+a;
+    if(change>8)
+        change=8;
+    if(change<=8 && change>6)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_full.png"));
     }
-    if(change==3)
+    if(change<=6 && change>4)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_75.png"));
     }
-    if(change==2)
+    if(change<=4 && change>2)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_50.png"));
     }
-    if(change==1)
+    if(change<=2 && change>0)
     {
         setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_25.png"));
     }
-    if(change==0)
+    if(change<=0)
     {
         emit gitgud();
-        //setPixmap(QPixmap(":/new/prefix1/Zasoby/hp_0.png"));
     }
-
 }

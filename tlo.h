@@ -4,6 +4,7 @@
 #include <QPixmap>
 #include <QKeyEvent>
 #include <QGraphicsPixmapItem>
+#include "nuta.h"
 
 class Tlo : public QObject, public QGraphicsPixmapItem
 {

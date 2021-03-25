@@ -11,9 +11,9 @@ Nuta::Nuta()
 void Nuta::onTimerTimeout()
 {
     setPos(x(),y()+10);
-    if(this->y()>=870)
+    if(this->y()>=870) //w przypadku gdy nuta "ucieknie"
     {
-        emit bruh();
+        emit bruh(); //sygnał do missed()
         delete this;
     }
 }
