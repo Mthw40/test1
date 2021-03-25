@@ -192,7 +192,7 @@ void MainWindow::startGame()
     tlo->lvl();
     scene->addItem(utility);
     scene->addItem(hpbar);
-    hpbar->changebar(0);
+    hpbar->changebar(8); //uzupełnienie paska życia
     inGame=true;
     score=0;
     index=0;
@@ -214,10 +214,10 @@ void MainWindow::startGame()
         theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/Amogus.mp3"));
     }
     else if(settings.value("Id").toInt()==2){
-        theme->setMedia(QUrl(""));
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/La Passion.wav"));
     }
     else if(settings.value("Id").toInt()==3){
-        theme->setMedia(QUrl(""));
+        theme->setMedia(QUrl("qrc:/new/prefix1/Zasoby/Tracks/EEEAAAOOO.wav"));
     }
     theme->play();
     //ustawienie ścieżki utworu
@@ -274,7 +274,6 @@ void MainWindow::endGame() //przegrana
 {
     tempo->stop();
     song.close();
-    hpbar->changebar(8); //uzupełnienie paska życia
     scene->removeItem(utility);
     scene->removeItem(hpbar);
     scene->removeItem(kl1);
@@ -294,7 +293,6 @@ void MainWindow::won() //wygrana
     tempo->stop();
     song.close();
     ui->Score->setText("");
-    hpbar->changebar(8);
     scene->removeItem(utility);
     scene->removeItem(hpbar);
     scene->removeItem(kl1);

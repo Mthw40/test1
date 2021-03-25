@@ -32,5 +32,9 @@
         <file>Zasoby/victory_music.mp3</file>
         <file>Zasoby/icon.png</file>
         <file>Zasoby/hp_0.png</file>
+        <file>Zasoby/Tracks/EEEAAAOOO.txt</file>
+        <file>Zasoby/Tracks/EEEAAAOOO.wav</file>
+        <file>Zasoby/Tracks/La Passion.txt</file>
+        <file>Zasoby/Tracks/La Passion.wav</file>
     </qresource>
 </RCC>

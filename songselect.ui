@@ -121,7 +121,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Sample</string>
+    <string>La Passion</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="option3">
@@ -139,7 +139,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Sample</string>
+    <string>EEEAAAOOO</string>
    </property>
   </widget>
  </widget>
